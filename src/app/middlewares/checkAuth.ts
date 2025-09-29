@@ -6,7 +6,7 @@ import { verifyToken } from "../utils/jwt";
 import { User } from "../modules/user/user.model";
 import httpStatus from "http-status-codes"
 
-export const checkAuth = (...authRoles: string[]) => async (req: Request, res: Response, next: NextFunction) => {
+export const checkAuth = () => async (req: Request, res: Response, next: NextFunction) => {
 
     try {
         const accessToken = req.headers.authorization;
@@ -22,10 +22,6 @@ export const checkAuth = (...authRoles: string[]) => async (req: Request, res: R
 
         if (!isUserExist) {
             throw new AppError(httpStatus.BAD_REQUEST, "User does not exist")
-        }
-
-        if (!authRoles.includes(verifiedToken.role)) {
-            throw new AppError(403, "You are not permitted to view this route!!!")
         }
         req.user = verifiedToken
         next()
