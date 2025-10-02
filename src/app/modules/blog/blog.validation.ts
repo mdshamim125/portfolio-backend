@@ -1,27 +1,26 @@
+// validations/blog.validation.ts
 import { z } from "zod";
 
-export const blogCreateSchema = z.object({
+export const createBlogSchema = z.object({
   title: z
-    .string({ required_error: "Title is required" })
-    .min(3, "Title must be at least 3 characters long"),
-  content: z
-    .string({ required_error: "Content is required" })
-    .min(10, "Content must be at least 10 characters long"),
-  author: z
-    .string({ required_error: "Author is required" })
-    .min(2, "Author name must be at least 2 characters long"),
-  category: z
     .string()
-    .optional(), // optional field
+    .min(3, "Title must be at least 3 characters")
+    .max(200, "Title cannot exceed 200 characters"),
+  content: z
+    .string()
+    .min(10, "Content must be at least 10 characters"),
+  author: z
+    .string()
+    .min(2, "Author name must be at least 2 characters"),
+  category: z.string().optional(),
   tags: z
     .array(z.string())
-    .optional(), // optional tags
+    .optional(),
+  thumbnail: z.string().url("Thumbnail must be a valid URL").optional(),
 });
 
-export const blogUpdateSchema = z.object({
-  title: z.string().min(3, "Title must be at least 3 characters long").optional(),
-  content: z.string().min(10, "Content must be at least 10 characters long").optional(),
-  author: z.string().min(2, "Author name must be at least 2 characters long").optional(),
-  category: z.string().optional(),
-  tags: z.array(z.string()).optional(),
-});
+export const updateBlogSchema = createBlogSchema.partial(); // all fields optional for updates
+
+// TypeScript types
+export type CreateBlogInput = z.infer<typeof createBlogSchema>;
+export type UpdateBlogInput = z.infer<typeof updateBlogSchema>;

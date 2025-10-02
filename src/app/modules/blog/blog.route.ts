@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { BlogControllers } from "./blog.controller";
 import { validateRequest } from "../../middlewares/validateRequest";
-import { blogCreateSchema, blogUpdateSchema } from "./blog.validation";
+import { createBlogSchema, updateBlogSchema } from "./blog.validation";
 import { checkAuth } from "../../middlewares/checkAuth";
 
 const router = Router();
@@ -9,17 +9,17 @@ const router = Router();
 router.post(
   "/",
   checkAuth(),
-  validateRequest(blogCreateSchema),
+  validateRequest(createBlogSchema),
   BlogControllers.createBlog
 );
 router.get("/", BlogControllers.getAllBlogs);
-router.get("/:id", BlogControllers.getBlogById);
+router.get("/:blogId", BlogControllers.getBlogById);
 router.put(
   "/:id",
   checkAuth(),
-  validateRequest(blogUpdateSchema),
+  validateRequest(updateBlogSchema),
   BlogControllers.updateBlog
 );
-router.delete("/:id", checkAuth(), BlogControllers.deleteBlog);
+router.delete("/:blogId", checkAuth(), BlogControllers.deleteBlog);
 
 export const BlogRoutes = router;

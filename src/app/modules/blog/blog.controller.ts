@@ -31,7 +31,7 @@ const getAllBlogs = catchAsync(
 
 const getBlogById = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const blog = await BlogServices.getBlogById(req.params.id);
+    const blog = await BlogServices.getBlogById(req.params.blogId);
     sendResponse(res, {
       success: true,
       statusCode: httpStatus.OK,
@@ -43,7 +43,7 @@ const getBlogById = catchAsync(
 
 const updateBlog = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const blog = await BlogServices.updateBlog(req.params.id, req.body);
+    const blog = await BlogServices.updateBlog(req.params.blogId, req.body);
     sendResponse(res, {
       success: true,
       statusCode: httpStatus.OK,
@@ -55,7 +55,7 @@ const updateBlog = catchAsync(
 
 const deleteBlog = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const blog = await BlogServices.deleteBlog(req.params.id);
+    const blog = await BlogServices.deleteBlog(req.params.blogId);
     sendResponse(res, {
       success: true,
       statusCode: httpStatus.OK,
