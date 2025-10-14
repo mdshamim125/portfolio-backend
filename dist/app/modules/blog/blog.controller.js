@@ -36,7 +36,7 @@ const getAllBlogs = (0, catchAsync_1.catchAsync)((req, res, next) => __awaiter(v
     });
 }));
 const getBlogById = (0, catchAsync_1.catchAsync)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const blog = yield blog_service_1.BlogServices.getBlogById(req.params.id);
+    const blog = yield blog_service_1.BlogServices.getBlogById(req.params.blogId);
     (0, sendResponse_1.sendResponse)(res, {
         success: true,
         statusCode: http_status_1.default.OK,
@@ -45,7 +45,7 @@ const getBlogById = (0, catchAsync_1.catchAsync)((req, res, next) => __awaiter(v
     });
 }));
 const updateBlog = (0, catchAsync_1.catchAsync)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const blog = yield blog_service_1.BlogServices.updateBlog(req.params.id, req.body);
+    const blog = yield blog_service_1.BlogServices.updateBlog(req.params.blogId, req.body);
     (0, sendResponse_1.sendResponse)(res, {
         success: true,
         statusCode: http_status_1.default.OK,
@@ -54,7 +54,7 @@ const updateBlog = (0, catchAsync_1.catchAsync)((req, res, next) => __awaiter(vo
     });
 }));
 const deleteBlog = (0, catchAsync_1.catchAsync)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const blog = yield blog_service_1.BlogServices.deleteBlog(req.params.id);
+    const blog = yield blog_service_1.BlogServices.deleteBlog(req.params.blogId);
     (0, sendResponse_1.sendResponse)(res, {
         success: true,
         statusCode: http_status_1.default.OK,

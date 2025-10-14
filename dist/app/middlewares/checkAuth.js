@@ -19,8 +19,9 @@ const jwt_1 = require("../utils/jwt");
 const user_model_1 = require("../modules/user/user.model");
 const http_status_codes_1 = __importDefault(require("http-status-codes"));
 const checkAuth = () => (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
     try {
-        const accessToken = req.headers.authorization;
+        const accessToken = req.headers.authorization || ((_a = req.cookies) === null || _a === void 0 ? void 0 : _a.accessToken);
         if (!accessToken) {
             throw new AppError_1.default(403, "No Token Received");
         }

@@ -46,16 +46,23 @@ const credentialsLogin = (payload) => __awaiter(void 0, void 0, void 0, function
     return {
         accessToken: userTokens.accessToken,
         refreshToken: userTokens.refreshToken,
-        user: rest
+        user: rest,
     };
 });
 const getNewAccessToken = (refreshToken) => __awaiter(void 0, void 0, void 0, function* () {
     const newAccessToken = yield (0, userTokens_1.createNewAccessTokenWithRefreshToken)(refreshToken);
     return {
-        accessToken: newAccessToken
+        accessToken: newAccessToken,
+    };
+});
+const getMe = (userId) => __awaiter(void 0, void 0, void 0, function* () {
+    const user = yield user_model_1.User.findById(userId).select("-password");
+    return {
+        data: user,
     };
 });
 exports.AuthServices = {
     credentialsLogin,
     getNewAccessToken,
+    getMe,
 };
